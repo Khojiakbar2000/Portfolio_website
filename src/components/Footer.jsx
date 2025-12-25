@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
 
 import { socialLinks } from "../constants";
+import { useLanguage } from "../contexts/LanguageContext";
+import { getTranslation } from "../translations";
 
 const Footer = () => {
+  const { language } = useLanguage();
+  
   return (
     <footer className='footer font-poppins'>
-      <hr className='border-slate-200' />
+      <hr className='border-slate-200 dark:border-slate-700' />
 
       <div className='footer-container'>
-        <p>
-          © 2023 <strong>Adrian Hajdin</strong>. All rights reserved.
+        <p className='text-black dark:text-gray-300'>
+          {getTranslation(language, "footer.copyright")} <strong>John</strong>. {getTranslation(language, "footer.rights")}
         </p>
 
         <div className='flex gap-3 justify-center items-center'>

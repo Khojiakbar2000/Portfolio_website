@@ -26,6 +26,18 @@ import arrow from './arrow.svg'
 import contact from './contact.svg'
 import soundon from './soundon.png'
 import soundoff from './soundoff.png'
+import greekArt from './greekArt.svg'
+import docker from './docker.svg'
+import graphql from './graphql.svg'
+import linux from './linux.svg'
+import mysql from './mysql.svg'
+import nestjs from './nestjs.svg'
+import nginx from './nginx.svg'
+import nvm from './nvm.svg'
+import php from './php.svg'
+import pm2 from './pm2.svg'
+import postman from './postman.svg'
+import socketdotio from './socketdotio.svg'
 
 export {
     css,
@@ -55,5 +67,17 @@ export {
     arrow,
     contact,
     soundon,
-    soundoff
+    soundoff,
+    greekArt,
+    docker,
+    graphql,
+    linux,
+    mysql,
+    nestjs,
+    nginx,
+    nvm,
+    php,
+    pm2,
+    postman,
+    socketdotio
 }

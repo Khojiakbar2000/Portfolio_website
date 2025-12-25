@@ -5,8 +5,11 @@ import { Suspense, useRef, useState } from "react";
 import { Fox } from "../models";
 import useAlert from "../hooks/useAlert";
 import { Alert, Loader } from "../components";
+import { useLanguage } from "../contexts/LanguageContext";
+import { getTranslation } from "../translations";
 
 const Contact = () => {
+  const { language } = useLanguage();
   const formRef = useRef();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const { alert, showAlert, hideAlert } = useAlert();
@@ -43,7 +46,7 @@ const Contact = () => {
           setLoading(false);
           showAlert({
             show: true,
-            text: "Thank you for your message 😃",
+            text: getTranslation(language, "contact.success"),
             type: "success",
           });
 
@@ -64,7 +67,7 @@ const Contact = () => {
 
           showAlert({
             show: true,
-            text: "I didn't receive your message 😢",
+            text: getTranslation(language, "contact.error"),
             type: "danger",
           });
         }
@@ -76,20 +79,24 @@ const Contact = () => {
       {alert.show && <Alert {...alert} />}
 
       <div className='flex-1 min-w-[50%] flex flex-col'>
-        <h1 className='head-text'>Get in Touch</h1>
+        <h1 className='head-text'>{getTranslation(language, "contact.title")}</h1>
+        
+        <p className='text-slate-500 dark:text-slate-400 mt-5 text-lg'>
+          {getTranslation(language, "contact.phone")} <a href='tel:01098926611' className='text-blue-600 dark:text-blue-400 hover:underline'>01098926611</a>
+        </p>
 
         <form
           ref={formRef}
           onSubmit={handleSubmit}
           className='w-full flex flex-col gap-7 mt-14'
         >
-          <label className='text-black-500 font-semibold'>
-            Name
+          <label className='text-gray-700 dark:text-gray-300 font-semibold'>
+            {getTranslation(language, "contact.name")}
             <input
               type='text'
               name='name'
               className='input'
-              placeholder='John'
+              placeholder={getTranslation(language, "contact.placeholder.name")}
               required
               value={form.name}
               onChange={handleChange}
@@ -97,13 +104,13 @@ const Contact = () => {
               onBlur={handleBlur}
             />
           </label>
-          <label className='text-black-500 font-semibold'>
-            Email
+          <label className='text-gray-700 dark:text-gray-300 font-semibold'>
+            {getTranslation(language, "contact.email")}
             <input
               type='email'
               name='email'
               className='input'
-              placeholder='John@gmail.com'
+              placeholder={getTranslation(language, "contact.placeholder.email")}
               required
               value={form.email}
               onChange={handleChange}
@@ -111,13 +118,13 @@ const Contact = () => {
               onBlur={handleBlur}
             />
           </label>
-          <label className='text-black-500 font-semibold'>
-            Your Message
+          <label className='text-gray-700 dark:text-gray-300 font-semibold'>
+            {getTranslation(language, "contact.message")}
             <textarea
               name='message'
               rows='4'
               className='textarea'
-              placeholder='Write your thoughts here...'
+              placeholder={getTranslation(language, "contact.placeholder.message")}
               value={form.message}
               onChange={handleChange}
               onFocus={handleFocus}
@@ -132,7 +139,7 @@ const Contact = () => {
             onFocus={handleFocus}
             onBlur={handleBlur}
           >
-            {loading ? "Sending..." : "Submit"}
+            {loading ? getTranslation(language, "contact.sending") : getTranslation(language, "contact.submit")}
           </button>
         </form>
       </div>
